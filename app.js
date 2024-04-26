@@ -20,11 +20,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', (req, res) => {
     res.render('home');
 });
+
 app.get('/makecampground', async (req, res) => {
-    const camp = new Campground({title: 'My backyard', description: "cheap camping"});
-    await camp.save();
-    res.send(camp);
-})
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', {campgrounds})
+});
 
 
 app.listen(3000, () => {
